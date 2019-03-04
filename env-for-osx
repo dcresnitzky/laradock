@@ -8,7 +8,9 @@
 BACKEND_CODE_PATH_HOST=../backend
 
 # Point to where the `APP_CODE_PATH_HOST` should be in the container. You may add flags to the path `:cached`, `:delegated`. When using Docker Sync add `:nocopy`
-BACKEND_CODE_PATH_CONTAINER=/var/www:cached
+BACKEND_CODE_PATH_CONTAINER=/var/www
+
+APP_CODE_CONTAINER_FLAG=:cached
 
 # Point to the path of your frontend applications code on your host
 FRONTEND_CODE_PATH_HOST=../frontend
@@ -106,7 +108,7 @@ WORKSPACE_INSTALL_GMP=false
 WORKSPACE_INSTALL_SOAP=false
 WORKSPACE_INSTALL_XSL=false
 WORKSPACE_INSTALL_IMAP=false
-WORKSPACE_INSTALL_MONGO=false
+WORKSPACE_INSTALL_MONGO=true
 WORKSPACE_INSTALL_AMQP=false
 WORKSPACE_INSTALL_MSSQL=false
 WORKSPACE_INSTALL_DRUSH=false
@@ -138,7 +140,6 @@ WORKSPACE_PGID=1000
 WORKSPACE_CHROME_DRIVER_VERSION=2.42
 WORKSPACE_TIMEZONE=America/Sao_Paulo
 WORKSPACE_SSH_PORT=2222
-
 ### PHP_FPM ###############################################
 
 PHP_FPM_INSTALL_ZIP_ARCHIVE=true
