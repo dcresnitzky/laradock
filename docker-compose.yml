@@ -7,39 +7,9 @@ networks:
     driver: ${NETWORKS_DRIVER}
 
 volumes:
-  mysql:
-    driver: ${VOLUMES_DRIVER}
-  percona:
-    driver: ${VOLUMES_DRIVER}
-  mssql:
-    driver: ${VOLUMES_DRIVER}
-  postgres:
-    driver: ${VOLUMES_DRIVER}
-  memcached:
-    driver: ${VOLUMES_DRIVER}
   redis:
     driver: ${VOLUMES_DRIVER}
-  neo4j:
-    driver: ${VOLUMES_DRIVER}
-  mariadb:
-    driver: ${VOLUMES_DRIVER}
   mongo:
-    driver: ${VOLUMES_DRIVER}
-  minio:
-    driver: ${VOLUMES_DRIVER}
-  rethinkdb:
-    driver: ${VOLUMES_DRIVER}
-  phpmyadmin:
-    driver: ${VOLUMES_DRIVER}
-  adminer:
-    driver: ${VOLUMES_DRIVER}
-  aerospike:
-    driver: ${VOLUMES_DRIVER}
-  caddy:
-    driver: ${VOLUMES_DRIVER}
-  elasticsearch:
-    driver: ${VOLUMES_DRIVER}
-  mosquitto:
     driver: ${VOLUMES_DRIVER}
 
 services:
@@ -245,49 +215,6 @@ services:
         - frontend
         - backend
 
-## PostgreSQL ###########################################
-    postgres:
-      build: ./postgres
-      volumes:
-        - ${DATA_PATH_HOST}/postgres:/var/lib/postgresql/data
-        - ${POSTGRES_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
-      ports:
-        - "${POSTGRES_PORT}:5432"
-      environment:
-        - POSTGRES_DB=${POSTGRES_DB}
-        - POSTGRES_USER=${POSTGRES_USER}
-        - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      networks:
-        - backend
-
-#### PostgreSQL PostGis ###################################
-#    postgres-postgis:
-#      build: ./postgres-postgis
-#      volumes:
-#        - ${DATA_PATH_HOST}/postgres:/var/lib/postgresql/data
-#        - ${POSTGRES_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
-#      ports:
-#        - "${POSTGRES_PORT}:5432"
-#      environment:
-#        - POSTGRES_DB=${POSTGRES_DB}
-#        - POSTGRES_USER=${POSTGRES_USER}
-#        - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-#      networks:
-#        - backend
-#
-### Neo4j ################################################
-    neo4j:
-      build: ./neo4j
-      ports:
-        - "7474:7474"
-        - "1337:1337"
-      environment:
-        - NEO4J_AUTH=default:secret
-      volumes:
-        - ${DATA_PATH_HOST}/neo4j:/var/lib/neo4j/data
-      networks:
-        - backend
-
 ### MongoDB ##############################################
     mongo:
       build: ./mongo
@@ -305,25 +232,6 @@ services:
         - ${DATA_PATH_HOST}/redis:/data
       ports:
         - "${REDIS_PORT}:6379"
-      networks:
-        - backend
-
-### RabbitMQ #############################################
-    rabbitmq:
-      build: ./rabbitmq
-      ports:
-        - "${RABBITMQ_NODE_HOST_PORT}:5672"
-        - "${RABBITMQ_MANAGEMENT_HTTP_HOST_PORT}:15672"
-        - "${RABBITMQ_MANAGEMENT_HTTPS_HOST_PORT}:15671"
-      privileged: true
-      environment:
-        - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
-        - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
-      hostname: laradock-rabbitmq
-      volumes:
-        - ${DATA_PATH_HOST}/rabbitmq:/var/lib/rabbitmq
-      depends_on:
-        - php-fpm
       networks:
         - backend
 
