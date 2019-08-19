@@ -95,12 +95,9 @@ services:
       tty: true
       environment:
         - PHP_IDE_CONFIG=${PHP_IDE_CONFIG}
-        - DOCKER_HOST=tcp://docker-in-docker:2375
       networks:
         - frontend
         - backend
-      links:
-        - docker-in-docker
 
 ### PHP-FPM ##############################################
     php-fpm:
@@ -164,15 +161,12 @@ services:
         - "dockerhost:${DOCKER_HOST_IP}"
       environment:
         - PHP_IDE_CONFIG=${PHP_IDE_CONFIG}
-        - DOCKER_HOST=tcp://docker-in-docker:2375
         - FAKETIME=${PHP_FPM_FAKETIME}
       depends_on:
         - workspace
       networks:
         - backend
-      links:
-        - docker-in-docker
-        -
+
 ### NGINX Server #########################################
     nginx:
       build:
