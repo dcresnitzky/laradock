@@ -12,6 +12,13 @@ volumes:
 
 services:
 
+### COMPOSER #############################################
+    composer:
+      image: composer
+      volumes:
+        - ${APP_CODE_PATH_HOST}:/app
+      command: composer install
+
 ### PHP-FPM ##############################################
     php-fpm:
       build:

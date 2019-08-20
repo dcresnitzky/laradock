@@ -6,7 +6,7 @@
 /jenkins/jenkins_home
 /logstash/pipeline/*.conf
 /logstash/config/pipelines.yml
-
+.env
 /nginx/ssl/*.crt
 /nginx/ssl/*.key
 /nginx/ssl/*.csr

@@ -84,7 +84,7 @@ DOCKER_SYNC_STRATEGY=unison
 WORKSPACE_TIMEZONE=UTC
 
 ### PHP_FPM ###############################################
-
+INSTALL_BLACKFIRE=false
 PHP_FPM_INSTALL_BCMATH=true
 PHP_FPM_INSTALL_MYSQLI=true
 PHP_FPM_INSTALL_INTL=true
